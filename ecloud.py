@@ -192,7 +192,7 @@ class ecloud:
                     "content": "天翼云盘签到小助手",
                 },
                 "txt": {
-                    "content": f"【账号】{self.account}",
+                    "content": f"【账号】{self.account[0:3]}", # 取前3位账号名
                 },
             },
             {
