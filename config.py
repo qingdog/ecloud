@@ -22,4 +22,4 @@ config = {
 # 从环境变量中取用户名密码
 load_dotenv()
 config.get("multi").clear()
-config.get("multi").append({"username": os.getenv("USERNAME189"), "password": os.getenv("PASSWORD189")})
+config.get("multi").append({"account": os.getenv("USERNAME189"), "password": os.getenv("PASSWORD189")})
