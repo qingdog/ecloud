@@ -8,7 +8,8 @@ from time import time, sleep
 
 KEY = "-----BEGIN PUBLIC KEY-----\n<% pubkey %>\n-----END PUBLIC KEY-----"
 
-BASE_URL = "https://open.e.189.cn"
+BASE_URL = "http://42.123.76.75"
+base_headers = {'Host': 'open.e.189.cn'}
 
 
 class ecloud:
@@ -22,6 +23,8 @@ class ecloud:
         resp = req.post(
             f"{BASE_URL}/api/logbox/config/encryptConf.do",
             data={"appId": "cloud"},
+            verify=True,
+            headers=base_headers
         ).json()
 
         if resp.get("result") == 0:
@@ -40,7 +43,7 @@ class ecloud:
         resp = req.post(
             f"{BASE_URL}/api/logbox/oauth2/appConf.do",
             data={"version": 2.0, "appKey": "cloud"},
-            headers={"lt": lt, "reqId": reqId},
+            headers={"lt": lt, "reqId": reqId, **base_headers},
         ).json()
 
         if resp.get("result") == "0":
@@ -80,6 +83,7 @@ class ecloud:
             "referer": url,
             "lt": self.lt,
             "reqid": self.reqId,
+            **base_headers
         }
 
         data = {
