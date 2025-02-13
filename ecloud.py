@@ -1,6 +1,9 @@
 import random
 import requests as req
 import rsa
+from requests.adapters import HTTPAdapter
+from urllib3 import Retry
+
 from tools import failed, success, b64ToHex
 from base64 import b64encode
 from urllib.parse import urlparse, parse_qs
@@ -18,6 +21,16 @@ class ecloud:
         self.password = config.get("password")
         self.client = req.Session()
         self.init()
+
+        # 配置重试策略
+        retries = Retry(
+            total=5,  # 最多重试 5 次
+            backoff_factor=1,  # 退避因子，重试的间隔时间会按照指数增长，例如 1s, 2s, 4s...
+            status_forcelist=[500, 502, 503, 504],  # 遇到这些 HTTP 状态码时触发重试
+            connect=5  # 连接超时重试次数
+        )
+        # 所有的 HTTPS 请求 都会使用这个 HTTPAdapter，从而启用我们定义的重试策略
+        self.client.mount("https://", HTTPAdapter(max_retries=retries))
 
     def init(self):
         resp = req.post(
@@ -109,7 +122,7 @@ class ecloud:
             f"{BASE_URL}/api/logbox/oauth2/loginSubmit.do",
             data=data,
             headers=self.headers,
-            timeout=5,
+            timeout=60,
         ).json()
 
         if resp.get("result") == 0:
