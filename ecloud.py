@@ -11,7 +11,8 @@ from time import time, sleep
 
 KEY = "-----BEGIN PUBLIC KEY-----\n<% pubkey %>\n-----END PUBLIC KEY-----"
 
-BASE_URL = "http://42.123.76.75"
+# BASE_URL = "http://42.123.76.75"
+BASE_URL = "http://42.123.76.87"
 base_headers = {'Host': 'open.e.189.cn'}
 
 
