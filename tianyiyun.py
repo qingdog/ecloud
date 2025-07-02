@@ -5,7 +5,7 @@
 # 出处：https://github.com/vistal8/tianyiyun
 # cron "30 4 * * *" script-path=xxx.py,tag=匹配cron用
 # const $ = new Env('天翼云盘签到');
-# 变量说明：TY_USERNAME 用户名 &隔开  TY_PASSWORD 密码 &隔开
+# 变量说明：ty_username 用户名 &隔开  ty_password 密码 &隔开
 # 5.9变更：更改推送为表格单次推送 打印日志简化 现在抽奖只能抽一次 第二次和第三次已经失效。
 # 推送变量需设置 WXPUSHER_APP_TOKEN 和 WXPUSHER_UID（多个UID用&分隔）
 # 有图形验证码就是风控了 自己去网页端登陆 输入验证码 等几天
@@ -24,15 +24,15 @@ BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
 B64MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
 # 从环境变量获取账号信息
-TY_USERNAMEs = os.getenv("TY_USERNAME").split('&') if os.getenv("TY_USERNAME") else []
-TY_PASSWORDs = os.getenv("TY_PASSWORD").split('&') if os.getenv("TY_PASSWORD") else []
+ty_usernames = os.getenv("ty_username").split('&') if os.getenv("ty_username") else []
+ty_passwords = os.getenv("ty_password").split('&') if os.getenv("ty_password") else []
 
 # 检查环境变量
-if not TY_USERNAMEs or not TY_PASSWORDs:
-    raise ValueError("❌ 请设置环境变量 TY_USERNAME 和 TY_PASSWORD")
+if not ty_usernames or not ty_passwords:
+    raise ValueError("❌ 请设置环境变量 ty_username 和 ty_password")
 
 # 组合账号信息
-accounts = [{"username": u, "password": p} for u, p in zip(TY_USERNAMEs, TY_PASSWORDs)]
+accounts = [{"username": u, "password": p} for u, p in zip(ty_usernames, ty_passwords)]
 
 # WxPusher配置
 WXPUSHER_APP_TOKEN = os.getenv("WXPUSHER_APP_TOKEN")
