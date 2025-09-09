@@ -36,5 +36,7 @@ jobs:
           PASSWORD189: ${{ secrets.PASSWORD189 }}  #
           ty_username: ${{ secrets.TY_USERNAME }}  #
           ty_password: ${{ secrets.TY_PASSWORD }}  #
+          XIANYUDANJIUSER: ${{ secrets.XIANYUDANJIUSER}}
+          XIANYUDANJIPASS: ${{ secrets.XIANYUDANJIPASS}}
         run: |
           python tianyiyun.py # python index.py
