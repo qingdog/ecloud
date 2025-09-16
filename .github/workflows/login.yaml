@@ -40,5 +40,5 @@ jobs:
           XIANYUDANJIUSER: ${{ secrets.XIANYUDANJIUSER}}
           XIANYUDANJIPASS: ${{ secrets.XIANYUDANJIPASS}}
         run: |
-          python tianyiyun.py # python index.py
-          python xianyudanji.py
+          python tianyiyun.py # python index.py python xianyudanji.py
+          
